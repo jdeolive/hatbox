@@ -23,11 +23,14 @@ import java.sql.Array;
 import java.sql.Blob;
 import java.sql.Clob;
 import java.sql.Date;
+import java.sql.NClob;
 import java.sql.Ref;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
+import java.sql.RowId;
 import java.sql.SQLException;
 import java.sql.SQLWarning;
+import java.sql.SQLXML;
 import java.sql.Statement;
 import java.sql.Time;
 import java.sql.Timestamp;
@@ -236,6 +239,14 @@ public abstract class AbstractResultSet implements ResultSet {
         return getNCharacterStream(findColumn(columnLabel));
     }
 
+    public NClob getNClob(int columnIndex) throws SQLException {
+        throw new SQLException("Unimplemented");
+    }
+    
+    public NClob getNClob(String columnLabel) throws SQLException {
+        return getNClob(findColumn(columnLabel));
+    };
+
     public String getNString(int columnIndex) throws SQLException {
         throw new SQLException("Unimplemented");
     }
@@ -272,6 +283,14 @@ public abstract class AbstractResultSet implements ResultSet {
         throw new SQLException("Unimplemented");
     }
 
+    public RowId getRowId(int columnIndex) throws SQLException {
+        throw new SQLException("Unimplemented");
+    }
+    
+    public RowId getRowId(String columnLabel) throws SQLException {
+        return getRowId(findColumn(columnLabel));
+    }
+    
     public short getShort(int columnIndex) throws SQLException {
         throw new SQLException("Unimplemented");
     }
@@ -290,6 +309,14 @@ public abstract class AbstractResultSet implements ResultSet {
 
     public String getString(String columnLabel) throws SQLException {
         return getString(findColumn(columnLabel));
+    }
+
+    public SQLXML getSQLXML(int columnIndex) throws SQLException {
+        throw new SQLException("Unimplemented");
+    }
+    
+    public SQLXML getSQLXML(String columnLabel) throws SQLException {
+        return getSQLXML(findColumn(columnLabel));
     }
 
     public Time getTime(int columnIndex) throws SQLException {
@@ -650,6 +677,14 @@ public abstract class AbstractResultSet implements ResultSet {
         updateNClob(findColumn(columnLabel), reader, length);
     }
 
+    public void updateNClob(int columnIndex, NClob nClob) throws SQLException {
+        throw new SQLException("Unimplemented");
+    }
+    
+    public void updateNClob(String columnLabel, NClob nClob) throws SQLException {
+        updateNClob(findColumn(columnLabel), nClob);
+    }
+    
     public void updateNString(int columnIndex, String string) throws SQLException {
         throw new SQLException("Unimplemented");
     }
@@ -694,6 +729,14 @@ public abstract class AbstractResultSet implements ResultSet {
         throw new SQLException("Unimplemented");
     }
 
+    public void updateRowId(int columnIndex, RowId x) throws SQLException {
+        throw new SQLException("Unimplemented");
+    }
+
+    public void updateRowId(String columnLabel, RowId x) throws SQLException {
+        updateRowId(findColumn(columnLabel), x);
+    }
+
     public void updateShort(int columnIndex, short x) throws SQLException {
         throw new SQLException("Unimplemented");
     }
@@ -710,6 +753,14 @@ public abstract class AbstractResultSet implements ResultSet {
         updateString(findColumn(columnLabel), x);
     }
 
+    public void updateSQLXML(int columnIndex, SQLXML xmlObject) throws SQLException {
+        throw new SQLException("Unimplemented");
+    }
+    
+    public void updateSQLXML(String columnLabel, SQLXML xmlObject) throws SQLException {
+        updateSQLXML(findColumn(columnLabel), xmlObject);
+    }
+    
     public void updateTime(int columnIndex, Time x) throws SQLException {
         throw new SQLException("Unimplemented");
     }

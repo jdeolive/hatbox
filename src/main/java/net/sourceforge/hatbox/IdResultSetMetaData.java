@@ -111,5 +111,12 @@ public class IdResultSetMetaData implements ResultSetMetaData {
     public boolean isWritable(int column) throws SQLException {
         return false;
     }
+    
+    public boolean isWrapperFor(Class<?> iface) throws SQLException {
+        return false;
+    }
 
+    public <T> T unwrap(Class<T> iface) throws SQLException {
+        return null;
+    }
 }

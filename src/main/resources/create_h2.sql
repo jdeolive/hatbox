@@ -13,3 +13,5 @@ create alias HATBOX_INTERSECTS_WKT for "net.sourceforge.hatbox.jts.Proc.queryInt
 create alias HATBOX_QUERY_WITH_PREDICATE_WKB for "net.sourceforge.hatbox.jts.Proc.queryWithPredicateWkb";
 
 create alias HATBOX_QUERY_WITH_PREDICATE_WKT for "net.sourceforge.hatbox.jts.Proc.queryWithPredicateWkt";
+
+create alias HATBOX_GET_DATASET_BOUNDS for "net.sourceforge.hatbox.jts.Proc.getDatasetBounds";

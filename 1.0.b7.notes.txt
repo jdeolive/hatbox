@@ -1,0 +1,7 @@
+Hatbox 1.0 beta 7 Release Notes
+
+- Fixes an issue with H2 using different InputStream implementations
+
+- Removed System.out references
+
+- Added source plugin to pom.xml

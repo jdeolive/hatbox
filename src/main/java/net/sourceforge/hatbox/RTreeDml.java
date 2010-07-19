@@ -32,6 +32,7 @@ public abstract class RTreeDml {
     protected String table;
     private String selectAllPk;
     private String selectSpatial;
+    private String selectAllSpatial;
     private String createInsTrigger;
     private String createBeforeUpdTrigger;
     private String createUpdTrigger;
@@ -150,6 +151,15 @@ public abstract class RTreeDml {
     }
     
     public abstract String createSelectSpatial();
+    
+    public String getSelectAllSpatial() {
+        if (selectAllSpatial == null) {
+            selectAllSpatial = createSelectAllSpatial();
+        }
+        return selectAllSpatial;
+    }
+    
+    public abstract String createSelectAllSpatial();
 
     public String getCreateIndex(int nodeStorageSize) {
         return createCreateIndex(nodeStorageSize);

@@ -1,0 +1,3 @@
+Hatbox 1.0 beta 6 Release Notes
+
+This release improves exception handling while building the index.

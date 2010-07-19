@@ -1,0 +1,14 @@
+Hatbox 1.0 beta 8 Release Notes
+
+- The core library can be compiled with either Java 5 or 6 . The binary for the core library is a Java 5 build,
+  but may be run with a Java 6 jre. The hatbox-ui GUI is Java 6 only.
+
+- H2 triggers have been upgraded to support H2 version 1.2 . The hatbox-ui GUI now also supports optional
+  provision of the H2 upgrade jar so that the target H2 database is automatically upgraded to v1.2 ODS.
+  See http://h2database.com/html/advanced.html#database_upgrade for details.
+  
+- A new method has been added to the net.sourceforge.hatbox.jts.Proc class to determine the bounds of the
+  dataset. This is determined directly from the root node of the index where one exists (without reading
+  any data rows) and by a full table scan where an index does not exist.
+  A new alias has been added to the H2 set to access the dataset bounds. A Derby function was more
+  problematic and has been deferred for the time being.

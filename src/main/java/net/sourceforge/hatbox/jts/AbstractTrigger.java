@@ -18,6 +18,7 @@ package net.sourceforge.hatbox.jts;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.SQLException;
 
 import org.h2.api.Trigger;
 
@@ -47,6 +48,12 @@ public abstract class AbstractTrigger implements Trigger {
 		}
     
 		return bytes;
+	}
+
+	public void close() throws SQLException {
+	}
+
+	public void remove() throws SQLException {
 	}
 
 }

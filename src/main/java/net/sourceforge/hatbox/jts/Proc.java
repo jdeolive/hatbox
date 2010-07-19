@@ -731,4 +731,46 @@ public class Proc {
         }
         return new FilteredResultSet(ids, session, queryGeom, predicate, schema, table);
     }
+    
+    /**
+     * Determine the bounds of a dataset by the most economical means available. If an index is built then
+     * use the root node, otherwise do a full scan of the spatial table.
+     * 
+     * @param con A JDBC conection to the database
+     * @param schema The dataset schema
+     * @param table The table name of the dataset
+     */
+    public static com.vividsolutions.jts.geom.Envelope getDatasetBounds(Connection con, String schema, String table) throws SQLException {
+        if (schema == null) {
+            schema = getDefaultSchema(con);
+        }
+        RTreeDml dml = RTreeDml.createDml(con, schema, table);
+        RTreeSessionDb session = null;
+        try {
+            session = new RTreeSessionDb(con, dml, false);
+        } catch (SQLException sqle) { // no index table, return null Envelope
+        	return new com.vividsolutions.jts.geom.Envelope();
+        }
+        long rootId = session.getRootId();
+        if (rootId < 0) { // index not built
+    		//TODO investigate more efficient solution
+        	com.vividsolutions.jts.geom.Envelope jtsEnv = new com.vividsolutions.jts.geom.Envelope();
+        	WKBReader reader = new WKBReader();
+            Statement stmt = con.createStatement();
+        	ResultSet rs = stmt.executeQuery(dml.getSelectAllSpatial());
+            while (rs.next()) {
+            	try {
+                    jtsEnv.expandToInclude(reader.read(rs.getBytes(1)).getEnvelopeInternal());
+            	} catch (ParseException pe) {
+            		// if the wkb is invalid then ignore it
+            	}
+            }
+            rs.close();
+            stmt.close();
+            return jtsEnv;
+        } else {
+        	Envelope env = session.getNode(rootId).getBounds();
+            return new com.vividsolutions.jts.geom.Envelope(env.getMinX(), env.getMaxX(), env.getMinY(), env.getMaxY());
+        }
+    }
 }

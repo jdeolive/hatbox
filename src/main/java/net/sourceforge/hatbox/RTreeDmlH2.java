@@ -30,7 +30,11 @@ public class RTreeDmlH2 extends RTreeDml {
         return "select \"" + getGeomColumn() + "\" from " + 
         getFullTableName() +
         " where \"" + getPkColumn() + "\" = ?";
-        
+    }
+    
+    public String createSelectAllSpatial() {
+        return "select \"" + getGeomColumn() + "\" from " + 
+        getFullTableName();        
     }
 
     public String createCreateIndex(int nodeStorageSize) {

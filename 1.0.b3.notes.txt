@@ -1,0 +1,18 @@
+Hatbox 1.0 beta 3 Release Notes
+
+This release is mostly about a major refactoring of the index Node structure.
+The cache design of beta 2 proved to have significant problems, so the cache
+has been removed. The Node is now just a functional wrapper over a byte array
+stored in the database. In a sense the cache has been moved into the database.
+Performance testing has revealed that the impact of this change is minimal,
+particularly when running JVM in server mode.
+
+There are no API changes, but the index table structure (including the meta-node)
+is completely incompatible with beta 2.
+
+Any existing spatial index tables will need to be dropped and the data
+tables re-spatialized.
+
+Justin Deoliveira of OpenGeo has started work on a current generation GeoTools
+datasource for Hatbox H2. This release of gt-hatbox will be the last from this project,
+in future watch out for Hatbox support in GeoTools. Many thanks Justin :-)
