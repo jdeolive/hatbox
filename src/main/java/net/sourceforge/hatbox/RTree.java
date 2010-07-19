@@ -42,8 +42,8 @@ public class RTree {
      * <p>
      * (ref Guttman84 p48)
      * 
-     * @param searchEnv
-     * @return
+     * @param searchEnv The search envelope to use
+     * @return A list of spatial table ids for rows where geometry intersects the search envelope
      * @throws SQLException
      */
     public List<Long> search(Envelope searchEnv) throws SQLException {
@@ -71,7 +71,7 @@ public class RTree {
      * <p>
      * (ref Guttman84 p49)
      * 
-     * @param entry
+     * @param entry The Entry to insert
      * @throws SQLException
      */
     public void insert(Entry entry) throws SQLException {
@@ -106,7 +106,7 @@ public class RTree {
      * 
      * @param id
      * @param newEnv
-     * @return
+     * @return The chosen Node
      * @throws SQLException
      */
     private Node chooseLeaf(long id, Entry entry) throws SQLException {
@@ -315,7 +315,7 @@ public class RTree {
      * low deltas.
      * 
      * @param entryList
-     * @return
+     * @return An array of two Entries to use as seed for a split
      */
     protected Entry[] pickSeeds(List<Entry> entryList) {
         int size = entryList.size();
@@ -399,7 +399,7 @@ public class RTree {
      * <p>
      * (ref Guttman84 p50)
      * 
-     * @param entry
+     * @param entry The Entry to delete
      * @throws SQLException
      */
     public void delete(Entry entry) throws SQLException {
@@ -433,7 +433,7 @@ public class RTree {
      * 
      * @param id
      * @param entryToFind
-     * @return
+     * @return The containing Node
      * @throws SQLException
      */
     private Node findLeaf(long id, Entry entryToFind) throws SQLException {
@@ -462,7 +462,7 @@ public class RTree {
      * <p>
      * (ref Guttman84 p50)
      * 
-     * @param entry
+     * @param node The Node to be deleted or added to.
      * @param orphans List of entries which need to be re-inserted
      * @throws SQLException
      */

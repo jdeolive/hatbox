@@ -40,7 +40,7 @@ public class Lock {
      * 
      * @param con The connection to use for acquiring the lock
      * @param dml The database and index specific DML to use
-     * @param write Is the lock to be used for writing the index?
+     * @param selectStmt The PreparedStatement to be used to acquire a read lock
      */
     public Lock(Connection con, RTreeDml dml, PreparedStatement selectStmt) {
         this.write = false;
@@ -64,7 +64,6 @@ public class Lock {
      * 
      * @param con The connection to use for acquiring the lock
      * @param dml The database and index specific DML to use
-     * @param write Is the lock to be used for writing the index?
      */
     public Lock(Connection con, RTreeDml dml) {
         this.write = true;
@@ -90,10 +89,19 @@ public class Lock {
         }
     }
 
+    /**
+     * @return The id (primary key) of the index root node. Defaults to -1 if not set.
+     */
     public long getRootId() {
         return meta.getRootId();
     }
 
+    /**
+     * Set the id of the index root node. The Lock must be a write lock.
+     * 
+     * @param rootId The id (primary key) of the index root node.
+     * @throws SQLException
+     */
     public void setRootId(long rootId) throws SQLException {
         meta.setRootId(rootId);
         if (write && (resultSet != null)) {
@@ -104,14 +112,25 @@ public class Lock {
         }
     }
 
+    /**
+     * @return The ResultSet used to implement this lock.
+     */
     public ResultSet getResultSet() {
         return resultSet;
     }
 
+    /**
+     * @return true if the lock is a write lock.
+     */
     public boolean isWrite() {
         return write;
     }
     
+    /**
+     * Close the underlying ResultSet of this lock.
+     * 
+     * @throws SQLException
+     */
     public void close() throws SQLException {
         if (resultSet != null) {
         	if (write) {
@@ -123,6 +142,9 @@ public class Lock {
         }
     }
 
+    /**
+     * @return true if the lock is closed (has no ResultSet).
+     */
     public boolean isClosed() {
         return (resultSet == null);
     }

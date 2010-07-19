@@ -47,9 +47,9 @@ public class RTreeSessionDb implements RTreeSession {
      * is not required because the index status has
      * already been set to 'BUILDING'
      * 
-     * @param con
-     * @param dml
-     * @param nodeMap
+     * @param con The JDBC Connection to use for the session
+     * @param dml The RTreeDml describing the dataset
+     * @param commitInterval The interval at which commit should be issued during an index build
      * @throws SQLException
      */
     public RTreeSessionDb(Connection con, RTreeDml dml, int commitInterval) throws SQLException {

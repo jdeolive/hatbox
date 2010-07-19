@@ -108,9 +108,9 @@ public class Node extends AbstractNode {
     }
 
     /**
-     * Find the entry for this id and change its bounds
-     * @param envelope
-     * @param id
+     * Change the bounds of this node to that of the supplied Entry
+     * 
+     * @param entry The new bounds
      */
     public void changeEntryEnvelope(Entry entry) {
         int idIndex = getEntryIndex(entry.getId());
